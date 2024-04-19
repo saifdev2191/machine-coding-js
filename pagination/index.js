@@ -63,7 +63,6 @@ window.addEventListener("DOMContentLoaded", function () {
     nextBtn.disabled = false
     prebBtn.disabled = false
     addColorToActiveBtn()
-    
     return imageList.filter(
       (images) => images.id >= startImageIndex && images.id <= lastImageIndex
     );

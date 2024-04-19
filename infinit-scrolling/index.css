@@ -1,0 +1,19 @@
+.prim-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* justify-content: space-around */
+}
+
+.each-product{
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc
+}
+
+.each-product img {
+    width: 90%;
+    height: 80%
+}
