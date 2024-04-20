@@ -1,0 +1,8 @@
+.star-rating{
+  display: flex
+}
+
+.each-star{
+  padding: 5px;
+  cursor: pointer
+}
