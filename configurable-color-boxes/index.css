@@ -1,0 +1,8 @@
+.each-color-el {
+  height: 100px;
+}
+
+.colorboxes {
+  display: flex;
+  flex-wrap: wrap;
+}
