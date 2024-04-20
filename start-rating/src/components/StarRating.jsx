@@ -3,55 +3,43 @@ import { useState } from "react";
 const StarRating = (props) => {
   const {
     noOfStar = 5,
-    starColor = <>&#9734;</>,
-    onHoverClr = <>&#11088;</>,
-    onSelectClr = <>&#127775;</>,
+    startEl = <>&#9734;</>,
+    onHoverClr = "yellow",
+    onSelectClr = "gold",
     onSelect = () => {},
-    minVal = 0,
   } = props;
 
-  const initState = () => {
-    let obj = {};
-    let i = 1;
-    while (i <= noOfStar) {
-      obj[i] = starColor;
-      i++;
-    }
-    return obj;
-  };
-
-  const [starConfig, setStarConfig] = useState(initState());
-  const [isSlected, setIsSelected] = useState(false)
-
-  const setClr = (e, clrToSet) => {
-    const result = { ...starConfig };
-    const currentStarId = e.target.id;
-    for(let i = 1; i <= noOfStar; i++){
-        if(i <= currentStarId){
-            result[i] = onSelectClr;
-        }
-        else{
-            result[i] = starColor
-        }
-    }
-    setStarConfig(result);
-  }
+  const [actionType, setActionType] = useState("");
+  const [currentStarId, setCurrentStarId] = useState();
 
   const handleHoverOnStar = (e) => {
-    setIsSelected(false)
-    setClr(e, onHoverClr)
+    const id = e.target.id;
+    setActionType("hover");
+    setCurrentStarId(id);
   };
 
   const handleSelect = (e) => {
-    setClr(e, onSelectClr)
-    setIsSelected(true)
-    onSelect(e.target.id)
+    setActionType("active");
+    onSelect(e.target.id);
   };
 
   const handleOnMouseLeave = () => {
-      if(!isSlected){
-        setStarConfig(initState())
-      } 
+    if (actionType !== "active") {
+      setActionType("");
+    }
+  };
+
+  const getStarColor = (i) => {
+    if (i <= currentStarId) {
+      switch (actionType) {
+        case "hover":
+          return onHoverClr;
+        case "active":
+          return onSelectClr;
+        default:
+          return "";
+      }
+    }
   };
 
   return (
@@ -61,13 +49,14 @@ const StarRating = (props) => {
         .map((star, i) => (
           <div
             key={i}
-            className="each-star"
+            className={`each-star`}
             onMouseOver={handleHoverOnStar}
             onMouseLeave={handleOnMouseLeave}
             onClick={handleSelect}
-            id={i + 1}
+            id={i}
+            style={{ color: getStarColor(i) }}
           >
-            {starConfig[i+1]}
+            {startEl}
           </div>
         ))}
     </div>

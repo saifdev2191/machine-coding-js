@@ -8,7 +8,7 @@ function App() {
   const [poorRating, setPoorRating]= useState(false)
 
   const handleSelect = (startCount) => {
-    if(startCount < 3){
+    if(startCount < 2){
       setPoorRating(true)
     }
     else{
@@ -21,7 +21,6 @@ function App() {
       <StarRating
         noOfStar={5}
         onSelect={handleSelect}
-        minVal={1}
       />
       {poorRating ? <textarea  rows="4" cols = "30" placeholder="Please leaves a feedback. How can we improve ?"/>: null}
     </div>
